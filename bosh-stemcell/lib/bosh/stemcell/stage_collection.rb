@@ -51,7 +51,7 @@ module Bosh::Stemcell
     end
 
 
-    def openstack__ft_stages
+    def openstack_ft_stages
       if operating_system.instance_of?(OperatingSystem::Centos)
         centos_openstack_ft_stages
       else
