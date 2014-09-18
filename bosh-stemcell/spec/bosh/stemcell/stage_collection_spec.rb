@@ -167,6 +167,54 @@ module Bosh::Stemcell
         end
       end
 
+
+      context 'when using OpenStack FT' do
+        let(:infrastructure) { Infrastructure.for('openstackft') }
+
+        context 'when the operating system is CentOS' do
+          let(:operating_system) { OperatingSystem.for('centos') }
+
+          it 'has the correct stages' do
+            expect(stage_collection.infrastructure_stages).to eq(
+                                                                  [
+                                                                      :system_openstack_network_centos,
+                                                                      :system_parameters,
+                                                                      :bosh_clean,
+                                                                      :bosh_harden,
+                                                                      :bosh_harden_ssh,
+                                                                      :image_create,
+                                                                      :image_install_grub,
+                                                                      :image_openstack_prepare_stemcell,
+                                                                      :stemcell_openstack
+                                                                  ]
+                                                              )
+          end
+        end
+
+        context 'when the operating system is Ubuntu' do
+          let(:operating_system) { OperatingSystem.for('ubuntu') }
+
+          it 'has the correct stages' do
+            expect(stage_collection.infrastructure_stages).to eq(
+                                                                  [
+                                                                      :system_openstack_network,
+                                                                      :system_openstack_clock,
+                                                                      :system_openstack_modules,
+                                                                      :system_parameters,
+                                                                      :bosh_clean,
+                                                                      :bosh_harden,
+                                                                      :bosh_harden_ssh,
+                                                                      :image_create,
+                                                                      :image_install_grub,
+                                                                      :image_openstack_prepare_stemcell,
+                                                                      :stemcell_openstack
+                                                                  ]
+                                                              )
+          end
+        end
+      end
+
+
       context 'when using vSphere' do
         let(:infrastructure) { Infrastructure.for('vsphere') }
 
