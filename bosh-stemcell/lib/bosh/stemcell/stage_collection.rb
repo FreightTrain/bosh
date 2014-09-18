@@ -39,12 +39,23 @@ module Bosh::Stemcell
         aws_stages
       when Infrastructure::OpenStack then
         openstack_stages
+      when Infrastructure::OpenStackFT then
+        openstack_ft_stages
       when Infrastructure::Vsphere then
         vsphere_stages
       when Infrastructure::Vcloud then
         vcloud_stages
       when Infrastructure::Warden then
         warden_stages
+      end
+    end
+
+
+    def openstack__ft_stages
+      if operating_system.instance_of?(OperatingSystem::Centos)
+        centos_openstack_ft_stages
+      else
+        default_openstack_ft_stages
       end
     end
 
@@ -146,21 +157,40 @@ module Bosh::Stemcell
       ]
     end
 
+
+    def centos_openstack_ft_stages
+      [
+          # Misc
+          :system_openstack_network_centos,
+          :system_parameters,
+          # Finalisation,
+          :bosh_clean,
+          :bosh_harden,
+          :bosh_harden_ssh,
+          :image_create,
+          :image_install_grub,
+          :image_openstack_prepare_stemcell,
+          # Final stemcell
+          :stemcell_openstack,
+      ]
+    end
+
+
     def centos_openstack_stages
       [
-        # Misc
-        :system_openstack_network_centos,
-        :system_parameters,
-        # Finalisation,
-        :bosh_clean,
-        :bosh_harden,
-        :bosh_harden_ssh,
-        :image_create,
-        :image_install_grub,
-        :image_openstack_qcow2,
-        :image_openstack_prepare_stemcell,
-        # Final stemcell
-        :stemcell_openstack,
+          # Misc
+          :system_openstack_network_centos,
+          :system_parameters,
+          # Finalisation,
+          :bosh_clean,
+          :bosh_harden,
+          :bosh_harden_ssh,
+          :image_create,
+          :image_install_grub,
+          :image_openstack_qcow2,
+          :image_openstack_prepare_stemcell,
+          # Final stemcell
+          :stemcell_openstack,
       ]
     end
 
@@ -203,6 +233,26 @@ module Bosh::Stemcell
         :image_openstack_prepare_stemcell,
         # Final stemcell
         :stemcell_openstack,
+      ]
+    end
+
+    def default_openstack_ft_stages
+      [
+          # Misc
+          :system_openstack_network,
+          :system_openstack_clock,
+          :system_openstack_modules,
+          :system_parameters,
+          # Finalisation,
+          :bosh_clean,
+          :bosh_harden,
+          :bosh_harden_ssh,
+          # Image/bootloader
+          :image_create,
+          :image_install_grub,
+          :image_openstack_prepare_stemcell,
+          # Final stemcell
+          :stemcell_openstack,
       ]
     end
 
