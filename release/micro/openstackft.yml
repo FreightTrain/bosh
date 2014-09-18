@@ -4,7 +4,7 @@ release:
   name: micro
   version: 9
 jobs:
-  - name: micro_openstack
+  - name: micro_openstackft
     template:
       - nats
       - redis
