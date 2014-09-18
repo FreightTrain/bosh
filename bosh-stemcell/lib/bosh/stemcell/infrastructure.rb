@@ -4,6 +4,8 @@ module Bosh::Stemcell
       case name
         when 'openstack'
           OpenStack.new
+        when 'openstackft'
+          OpenStackFT.new
         when 'aws'
           Aws.new
         when 'vsphere'
@@ -50,6 +52,12 @@ module Bosh::Stemcell
     class OpenStack < Base
       def initialize
         super(name: 'openstack', hypervisor: 'kvm', default_disk_size: 10240)
+      end
+    end
+
+    class OpenStackFT < Base
+      def initialize
+        super(name: 'openstackft', hypervisor: 'kvm', default_disk_size: 10240)
       end
     end
 
