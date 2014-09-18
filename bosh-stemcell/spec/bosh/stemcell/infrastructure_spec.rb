@@ -6,6 +6,7 @@ module Bosh::Stemcell
     describe '.for' do
       it 'returns the correct infrastrcture' do
         expect(Infrastructure.for('openstack')).to be_an(Infrastructure::OpenStack)
+        expect(Infrastructure.for('openstackft')).to be_an(Infrastructure::OpenStackFT)
         expect(Infrastructure.for('aws')).to be_an(Infrastructure::Aws)
         expect(Infrastructure.for('vsphere')).to be_a(Infrastructure::Vsphere)
         expect(Infrastructure.for('warden')).to be_a(Infrastructure::Warden)
@@ -89,6 +90,16 @@ module Bosh::Stemcell
     it { should_not be_light }
 
     it { should eq Infrastructure.for('openstack') }
+    it { should_not eq Infrastructure.for('vsphere') }
+  end
+
+  describe Infrastructure::OpenStackFT do
+    its(:name)              { should eq('openstackft') }
+    its(:hypervisor)        { should eq('kvm') }
+    its(:default_disk_size) { should eq(10240) }
+    it { should_not be_light }
+
+    it { should eq Infrastructure.for('openstackft') }
     it { should_not eq Infrastructure.for('vsphere') }
   end
 
