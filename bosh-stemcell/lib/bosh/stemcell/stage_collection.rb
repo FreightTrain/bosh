@@ -253,7 +253,7 @@ module Bosh::Stemcell
           :image_openstack_raw,
           :image_openstack_prepare_stemcell,
           # Final stemcell
-          :stemcell_openstack,
+          :stemcell_openstackft,
       ]
     end
 
