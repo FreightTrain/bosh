@@ -169,6 +169,7 @@ module Bosh::Stemcell
           :bosh_harden_ssh,
           :image_create,
           :image_install_grub,
+          :image_openstack_raw,
           :image_openstack_prepare_stemcell,
           # Final stemcell
           :stemcell_openstack,
@@ -250,6 +251,7 @@ module Bosh::Stemcell
           # Image/bootloader
           :image_create,
           :image_install_grub,
+          :image_openstack_raw,
           :image_openstack_prepare_stemcell,
           # Final stemcell
           :stemcell_openstack,
