@@ -61,6 +61,12 @@ module Bosh::Stemcell
       end
     end
 
+    class OpenStackFT < Base
+      def initialize
+        super(name: 'openstackft', hypervisor: 'kvm', default_disk_size: 10240)
+      end
+    end
+
     class Vsphere < Base
       def initialize
         super(name: 'vsphere', hypervisor: 'esxi', default_disk_size: 3072)
