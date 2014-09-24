@@ -195,6 +195,7 @@ module Bosh::Stemcell
         :bosh_clean,
         :bosh_harden,
         :bosh_harden_ssh,
+        :bosh_local_metadata_route,
         :bosh_openstack_agent_settings,
         # Image/bootloader
         :image_create,
