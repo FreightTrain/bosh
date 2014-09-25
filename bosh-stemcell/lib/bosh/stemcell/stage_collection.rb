@@ -190,6 +190,7 @@ module Bosh::Stemcell
         :system_openstack_network,
         :system_openstack_clock,
         :system_openstack_modules,
+        :system_growroot,
         :system_parameters,
         # Finalisation,
         :bosh_clean,
