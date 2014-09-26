@@ -16,7 +16,13 @@ if [ "${DISTRIB_CODENAME}" == "lucid" ]; then
 
 elif [ "${DISTRIB_CODENAME}" == "trusty" ]; then
 
-  pkg_mgr install cloud-initramfs-growroot
+  cp $assets_dir/lucid/*.deb $chroot/tmp/
+
+  run_in_chroot $chroot "dpkg -i /tmp/lucid-growroot_0.1ubuntu1~ppa0_all.deb"
+
+  rm $chroot/tmp/*.deb
+
+
 
 else
 
